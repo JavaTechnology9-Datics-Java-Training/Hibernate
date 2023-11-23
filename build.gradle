@@ -1,0 +1,39 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    sourceCompatibility = '11'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    implementation 'org.hibernate:hibernate-core:5.0.3.Final'
+
+    implementation 'org.postgresql:postgresql:42.2.2'
+    implementation 'javax.xml.bind:jaxb-api:2.3.1'
+
+    implementation 'org.javassist:javassist:3.25.0-GA'
+
+    implementation 'com.sun.xml.bind:jaxb-impl:2.3.1'
+
+    implementation 'com.sun.xml.bind:jaxb-core:2.3.0.1'
+// https://mvnrepository.com/artifact/org.apache.geronimo.bundles/jaxb-impl
+    implementation 'org.apache.geronimo.bundles:jaxb-impl:2.2.3-1_1'
+
+}
+
+/*tasks.named('bootBuildImage') {
+    builder = 'paketobuildpacks/builder-jammy-base:latest'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}*/
