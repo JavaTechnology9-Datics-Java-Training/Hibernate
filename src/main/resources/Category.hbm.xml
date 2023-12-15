@@ -4,7 +4,7 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name = "com.example.springhibernate.Category" table = "CATEGORY">
+    <class name = "com.example.springhibernate.Category" table = "CATEGORY" dynamic-insert="true">
 
         <meta attribute = "class-description">
             This class contains the Category detail.
@@ -13,8 +13,11 @@
         <id name = "id" type = "long" column = "CATEGORY_ID">
             <generator class="native"/>
         </id>
+        <!--<property name="count" formula="(select AVG(b.amount) from BID b where b.bid_id=bid_id)" type="big_decimal" insert=""/>-->
 
-        <property name = "name" column = "CATEGORY_NAME" type = "string"/>
+        <property name = "name"  type = "string" not-null="true" > <!--insert="false" update="false"-->
+            <column name="CATEGORY_NAME"/>
+        </property>
         <many-to-one name="parentCategory" class="com.example.springhibernate.Category" cascade="none" column="PARENT_CATEGORY_ID"/>
         <set name="childCategories" inverse="true" cascade="all" table="CATEGORY">
             <key column="PARENT_CATEGORY_ID"></key>

@@ -15,6 +15,7 @@ public class HibernateMain {
         //configuration.configure("hibernate.cfg.xml");
         configuration.addResource("Message.hbm.xml");
         configuration.addResource("Category.hbm.xml");
+        configuration.setPhysicalNamingStrategy(new HINamingStrategy());
         //configuration.addClass(com.example.springhibernate.Message.class);
         SessionFactory sessionFactory = configuration.buildSessionFactory();
         Session session = sessionFactory.openSession();
@@ -25,9 +26,9 @@ public class HibernateMain {
 
 
         Category parentCategory=new Category();
-        parentCategory.setName("parent Category Example");
+        parentCategory.setName("parent Category Example 2");
         Category childCategory=new Category();
-        childCategory.setName("child category");
+        childCategory.setName("child category 2");
         parentCategory.addChildCategory(childCategory);
         session.save(parentCategory);
         transaction.commit();
