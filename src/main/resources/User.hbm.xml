@@ -1,0 +1,32 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.example.springhibernate">
+    <class name = "User" table = "USER">
+
+        <meta attribute = "class-description">
+            This class contains the Message detail.
+        </meta>
+
+        <id name = "id" type = "long" column = "USER_ID">
+            <generator class="increment"/>
+        </id>
+
+        <property name = "username" column = "USER_NAME" type = "string"/>
+        <component name="homeAddress" class="Address" >
+           <!-- <parent name="user"/>-->
+            <property name="street" type="java.lang.String" column="HOME_STREET" not-null="true"/>
+            <property name="city" type="java.lang.String" column="HOME_CITY" not-null="true"/>
+            <property name="zipcode" type="java.lang.String" column="HOME_ZIPCODE" not-null="true"/>
+        </component>
+
+        <component name="billingAddress" class="Address">
+            <property name="street" type="java.lang.String" column="BILLING_ADDRESS_STREET" not-null="true"/>
+            <property name="city" type="java.lang.String" column="BILLING_ADDRESS_CITY" not-null="true"/>
+            <property name="zipcode" type="java.lang.String" column="BILLING_ADDRESS_ZIPCODE" not-null="true"/>
+        </component>
+
+    </class>
+</hibernate-mapping>

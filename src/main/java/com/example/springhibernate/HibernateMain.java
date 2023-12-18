@@ -15,6 +15,7 @@ public class HibernateMain {
         //configuration.configure("hibernate.cfg.xml");
         configuration.addResource("Message.hbm.xml");
         configuration.addResource("Category.hbm.xml");
+        configuration.addResource("User.hbm.xml");
         configuration.setPhysicalNamingStrategy(new HINamingStrategy());
         //configuration.addClass(com.example.springhibernate.Message.class);
         SessionFactory sessionFactory = configuration.buildSessionFactory();
@@ -25,12 +26,26 @@ public class HibernateMain {
         message.setNextMessage(message1);*/
 
 
-        Category parentCategory=new Category();
+        /*Category parentCategory=new Category();
         parentCategory.setName("parent Category Example 2");
         Category childCategory=new Category();
         childCategory.setName("child category 2");
-        parentCategory.addChildCategory(childCategory);
-        session.save(parentCategory);
+        parentCategory.addChildCategory(childCategory);*/
+
+        User user=new User();
+        Address homeAddress=new Address();
+        Address billingAddress=new Address();
+        user.setUsername("hibernate_user");
+        homeAddress.setCity("Hyderabad");
+        homeAddress.setStreet("hi-tech city");
+        homeAddress.setZipcode("500074");
+
+        billingAddress.setStreet("Royal Meenakshi Mall");
+        billingAddress.setCity("Bangalore");
+        billingAddress.setZipcode("600012");
+        user.setHomeAddress(homeAddress);
+        user.setBillingAddress(billingAddress);
+        session.save(user);
         transaction.commit();
         System.out.println("Inserted record successfully");
         /*childCategory.setParentCategory(parentCategory);
