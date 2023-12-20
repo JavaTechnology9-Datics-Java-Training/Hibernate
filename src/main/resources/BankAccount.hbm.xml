@@ -1,0 +1,36 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.example.springhibernate">
+    <class name = "BankAccount" table = "BANK_ACCOUNT">
+
+        <meta attribute = "class-description">
+            This class contains the Credit Card detail.
+        </meta>
+
+        <id name = "id" type = "long" column = "BANK_ACCOUNT_ID">
+            <generator class="increment"/>
+        </id>
+        <!--<property name="count" formula="(select AVG(b.amount) from BID b where b.bid_id=bid_id)" type="big_decimal" insert=""/>-->
+
+        <property name = "bankName"  type = "string" not-null="true" > <!--insert="false" update="false"-->
+            <column name="BANK_ACCOUNT_NAME"/>
+        </property>
+        <property name = "accountNumber"  type = "string" not-null="true" > <!--insert="false" update="false"-->
+            <column name="BANK_ACCOUNT_NUMBER"/>
+        </property>
+
+        <property name = "owner"  type = "string" not-null="true" > <!--insert="false" update="false"-->
+            <column name="BILLING_DETAILS_OWNER"/>
+        </property>
+        <property name = "number"  type = "string" not-null="true" > <!--insert="false" update="false"-->
+            <column name="BILLING_DETAILS_NUMBER"/>
+        </property>
+        <property name = "date"  type = "date" not-null="true" > <!--insert="false" update="false"-->
+            <column name="BILLING_DETAILS_DATE"/>
+        </property>
+
+    </class>
+</hibernate-mapping>
