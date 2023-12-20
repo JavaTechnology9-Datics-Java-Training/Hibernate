@@ -18,7 +18,10 @@ public class HibernateMain {
         //configuration.addResource("Category.hbm.xml");
         //configuration.addResource("User.hbm.xml");
         //configuration.addResource("CreditCard.hbm.xml");
-        configuration.addResource("BillingDetails.hbm.xml");
+        //configuration.addResource("BillingDetails.hbm.xml");
+        //configuration.addResource("BankAccount.hbm.xml");
+        configuration.addResource("Item.hbm.xml");
+        configuration.addResource("Bid.hbm.xml");
         configuration.setPhysicalNamingStrategy(new HINamingStrategy());
         //configuration.addClass(com.example.springhibernate.Message.class);
         SessionFactory sessionFactory = configuration.buildSessionFactory();
@@ -50,20 +53,33 @@ public class HibernateMain {
         user.setBillingAddress(billingAddress);*/
 
         /*CreditCard creditCard=new CreditCard();
-        creditCard.setOwner("Money_back_Credit_Card");
+        creditCard.setOwner("Table per sub class (Credit_Card)");
         creditCard.setNumber("741-852-963");
         creditCard.setType("Indian-Oil");
         creditCard.setExpMonth("Feb");
         creditCard.setExpYear("2036");
         creditCard.setDate(new Date());*/
 
-        BankAccount bankAccount=new BankAccount();
+        /*BankAccount bankAccount=new BankAccount();
         bankAccount.setDate(new Date());
         bankAccount.setNumber("124-745-968");
-        bankAccount.setOwner("HDFC-BANK");
+        bankAccount.setOwner("Table per sub class");
         bankAccount.setAccountNumber("5010045874");
-        bankAccount.setBankName("HDFC-BANK");
-        session.save(bankAccount);
+        bankAccount.setBankName("HDFC-BANK");*/
+        Item item=new Item();
+        item.setName("Hibernate_Book");
+        item.setDescription("Hibernate ORM Example");
+
+        Bid bid1=new Bid();
+        bid1.setAmount("450");
+        bid1.setItem(item);
+        Bid bid2=new Bid();
+        bid2.setAmount("750");
+        bid2.setItem(item);
+
+        item.getBids().add(bid1);
+        item.getBids().add(bid2);
+        session.save(item);
         transaction.commit();
         System.out.println("Inserted record successfully");
         /*childCategory.setParentCategory(parentCategory);

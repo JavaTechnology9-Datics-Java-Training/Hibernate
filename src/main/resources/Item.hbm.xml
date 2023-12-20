@@ -1,0 +1,30 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.example.springhibernate">
+    <class name = "Item" table = "ITEM">
+
+        <meta attribute = "class-description">
+            This class contains the Item detail.
+        </meta>
+
+        <id name = "id" type = "long" column = "ITEM_ID">
+            <generator class="increment"/>
+        </id>
+
+        <property name = "name"  type = "string" not-null="true" > <!--insert="false" update="false"-->
+            <column name="ITEM_NAME"/>
+        </property>
+
+        <property name = "description"  type = "string" not-null="true" > <!--insert="false" update="false"-->
+            <column name="ITEM_DESCRIPTION"/>
+        </property>
+        <set name="bids" inverse="true" cascade="save-update">
+            <key column="ITEM_ID"/>
+            <one-to-many class="Bid"/>
+        </set>
+
+    </class>
+</hibernate-mapping>

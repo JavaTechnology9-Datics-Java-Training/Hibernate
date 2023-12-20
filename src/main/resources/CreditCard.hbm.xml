@@ -25,15 +25,15 @@
             <column name="CREDIT_CARD_EXP_YEAR"/>
         </property>
 
-        <property name = "owner"  type = "string" not-null="true" > <!--insert="false" update="false"-->
+        <!--<property name = "owner"  type = "string" not-null="true" > &lt;!&ndash;insert="false" update="false"&ndash;&gt;
             <column name="BILLING_DETAILS_OWNER"/>
         </property>
-        <property name = "number"  type = "string" not-null="true" > <!--insert="false" update="false"-->
+        <property name = "number"  type = "string" not-null="true" > &lt;!&ndash;insert="false" update="false"&ndash;&gt;
             <column name="BILLING_DETAILS_NUMBER"/>
         </property>
-        <property name = "date"  type = "date" not-null="true" > <!--insert="false" update="false"-->
+        <property name = "date"  type = "date" not-null="true" > &lt;!&ndash;insert="false" update="false"&ndash;&gt;
             <column name="BILLING_DETAILS_DATE"/>
-        </property>
+        </property>-->
 
     </class>
 </hibernate-mapping>

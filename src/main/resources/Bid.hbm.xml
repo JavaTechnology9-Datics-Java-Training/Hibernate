@@ -1,0 +1,23 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.example.springhibernate">
+    <class name = "Bid" table = "BID">
+
+        <meta attribute = "class-description">
+            This class contains the Bid detail.
+        </meta>
+
+        <id name = "id" type = "long" column = "BID_ID">
+            <generator class="increment"/>
+        </id>
+
+        <property name = "amount"  type = "string" not-null="true" > <!--insert="false" update="false"-->
+            <column name="BID_AMOUNT"/>
+        </property>
+        <many-to-one name="item" column="ITEM_ID" class="Item" not-null="true"/>
+
+    </class>
+</hibernate-mapping>

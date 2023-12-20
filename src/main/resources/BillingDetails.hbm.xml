@@ -13,7 +13,7 @@
         <id name = "id" type = "long" column = "BILLING_DETAILS_ID">
             <generator class="increment"/>
         </id>
-        <discriminator column="BILLING_DETAILS_TYPE" type="java.lang.String"/>
+        <!--<discriminator column="BILLING_DETAILS_TYPE" type="java.lang.String"/>-->
         <!--<property name="count" formula="(select AVG(b.amount) from BID b where b.bid_id=bid_id)" type="big_decimal" insert=""/>-->
 
         <property name = "owner"  type = "string" not-null="true" > <!--insert="false" update="false"-->
@@ -25,7 +25,8 @@
         <property name = "date"  type = "date" not-null="true" > <!--insert="false" update="false"-->
             <column name="BILLING_DETAILS_DATE"/>
         </property>
-        <subclass name="CreditCard" discriminator-value="CC">
+        <joined-subclass name="CreditCard" table="CREDIT_CARD">
+            <key column="CREDIT_CARD_ID"/>
             <property name = "type"  type = "string" not-null="true" > <!--insert="false" update="false"-->
                 <column name="CREDIT_CARD_TYPE"/>
             </property>
@@ -35,15 +36,17 @@
             <property name = "expYear"  type = "string" not-null="true" > <!--insert="false" update="false"-->
                 <column name="CREDIT_CARD_EXP_YEAR"/>
             </property>
-        </subclass>
 
-        <subclass name="BankAccount" discriminator-value="BA">
+        </joined-subclass>
+
+        <joined-subclass name="BankAccount" table="BANK_ACCOUNT">
+            <key column="BANK_ACCOUNT_ID"/>
             <property name = "bankName"  type = "string" not-null="true" > <!--insert="false" update="false"-->
                 <column name="BANK_ACCOUNT_NAME"/>
             </property>
             <property name = "accountNumber"  type = "string" not-null="true" > <!--insert="false" update="false"-->
                 <column name="BANK_ACCOUNT_NUMBER"/>
             </property>
-        </subclass>
+        </joined-subclass>
     </class>
 </hibernate-mapping>
