@@ -56,4 +56,15 @@ public class Item {
         category.getItems().add(this);
         categories.add(category);
     }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", categories=" + categories +
+                ", bids=" + bids +
+                '}';
+    }
 }

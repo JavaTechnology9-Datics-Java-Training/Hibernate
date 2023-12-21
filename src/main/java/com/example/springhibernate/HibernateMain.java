@@ -1,5 +1,6 @@
 package com.example.springhibernate;
 
+import org.hibernate.LockMode;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -66,9 +67,9 @@ public class HibernateMain {
         bankAccount.setOwner("Table per sub class");
         bankAccount.setAccountNumber("5010045874");
         bankAccount.setBankName("HDFC-BANK");*/
-        Item item=new Item();
-        item.setName("Hibernate_Book");
-        item.setDescription("Hibernate ORM Example");
+        /*Item item=new Item();
+        item.setName("Inverse");
+        item.setDescription("Inverse Example");
 
         Bid bid1=new Bid();
         bid1.setAmount("450");
@@ -78,12 +79,33 @@ public class HibernateMain {
         bid2.setItem(item);
 
         item.getBids().add(bid1);
-        item.getBids().add(bid2);
-        session.save(item);
-        transaction.commit();
-        System.out.println("Inserted record successfully");
+        item.getBids().add(bid2);*/
+        /*session.save(item);
+        transaction.commit();*/
+        //System.out.println("Inserted record successfully");
+        /*Item item=new Item();
+        Item load = session.load(Item.class, 1l);// load(ClassType, primaryKey)
+        session.load(item,2l);// load(Object, primaryKey)
+        Object item1 = session.load("com.example.springhibernate.Item", 3l);
+        System.out.println(load);
+        System.out.println(item);
+        System.out.println(item1);*/
+        /*Object item = session.get("com.example.springhibernate.Item", 3l);
+        System.out.println(item);
+        session.evict(item);*/
         /*childCategory.setParentCategory(parentCategory);
         parentCategory.getChildCategories().add(childCategory);*/
         //System.exit(1);
+        Object item1 = session.get("com.example.springhibernate.Item", 3l);
+        Object item2 = session.get("com.example.springhibernate.Item", 3l);
+        if(item1==item2) System.out.println("1 and 2 items are identical");
+        transaction.commit();
+        session.close();
+        Session session2 = sessionFactory.openSession();
+        Transaction transaction1 = session2.beginTransaction();
+        Object load = session2.get("com.example.springhibernate.Item", 3l);
+        if(item1==load) System.out.println("1 and 2 items are identical");
+        transaction1.commit();
+        session2.close();
     }
 }
