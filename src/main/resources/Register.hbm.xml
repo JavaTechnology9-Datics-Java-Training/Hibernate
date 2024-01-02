@@ -1,0 +1,24 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.example.springhibernate">
+    <class name = "Register" table = "REGISTER">
+
+        <meta attribute = "class-description">
+            This class contains the Register detail.
+        </meta>
+
+        <id name = "id" type = "long" column = "USER_ID">
+            <generator class="increment"/>
+        </id>
+
+        <property name = "username" column = "USER_NAME" type = "string"/>
+        <property name="firstName" column="FIRST_NAME" type="java.lang.String"/>
+        <property name="lastName" column="LAST_NAME" type="java.lang.String"/>
+        <property name="loginName" column="LOGIN_NAME" type="java.lang.String"/>
+        <property name="password" column="PASSWORD" type="java.lang.String"/>
+
+    </class>
+</hibernate-mapping>

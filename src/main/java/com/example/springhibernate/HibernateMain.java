@@ -21,8 +21,9 @@ public class HibernateMain {
         //configuration.addResource("CreditCard.hbm.xml");
         //configuration.addResource("BillingDetails.hbm.xml");
         //configuration.addResource("BankAccount.hbm.xml");
-        configuration.addResource("Item.hbm.xml");
-        configuration.addResource("Bid.hbm.xml");
+        //configuration.addResource("Item.hbm.xml");
+        //configuration.addResource("Bid.hbm.xml");
+        configuration.addResource("Register.hbm.xml");
         configuration.setPhysicalNamingStrategy(new HINamingStrategy());
         //configuration.addClass(com.example.springhibernate.Message.class);
         SessionFactory sessionFactory = configuration.buildSessionFactory();
@@ -96,16 +97,53 @@ public class HibernateMain {
         /*childCategory.setParentCategory(parentCategory);
         parentCategory.getChildCategories().add(childCategory);*/
         //System.exit(1);
-        Object item1 = session.get("com.example.springhibernate.Item", 3l);
+        /*Object item1 = session.get("com.example.springhibernate.Item", 3l);
         Object item2 = session.get("com.example.springhibernate.Item", 3l);
         if(item1==item2) System.out.println("1 and 2 items are identical");
-        transaction.commit();
-        session.close();
+            transaction.commit();
+            session.close();
         Session session2 = sessionFactory.openSession();
         Transaction transaction1 = session2.beginTransaction();
         Object load = session2.get("com.example.springhibernate.Item", 3l);
         if(item1==load) System.out.println("1 and 2 items are identical");
         transaction1.commit();
-        session2.close();
+        session2.close();*/
+        /*Object item1 = session.get("com.example.springhibernate.Item", 3l);
+        Object bid1 = session.get("com.example.springhibernate.Bid", 5l);
+        Object bid2 = session.get("com.example.springhibernate.Bid", 6l);
+        session.delete(bid1);
+        session.delete(bid2);
+        session.delete(item1);
+        transaction.commit();
+        session.close();*/
+       /* Item item=new Item();
+        item.setName("Inverse");
+        item.setDescription("Inverse Example");
+
+        Bid bid1=new Bid();
+        bid1.setAmount("450");
+        bid1.setItem(item);
+        Bid bid2=new Bid();
+        bid2.setAmount("750");
+        bid2.setItem(item);
+
+        item.getBids().add(bid1);
+        item.getBids().add(bid2);
+        session.saveOrUpdate(item);
+        transaction.commit();*/
+        //session.update();
+        Register register=new Register();// new transient to persistent
+        register.setFirstName("John");
+        register.setLastName("Doe");
+        session.save(register);
+        transaction.commit();
+        //session.close();
+        Session session2 = sessionFactory.openSession();
+        Transaction transaction2 = session2.beginTransaction();
+        register.setPassword("secret123");
+        register.setUsername("jonny");
+        register.setLoginName("jonny_doe");
+        session2.update(register);
+        transaction2.commit();
     }
 }
