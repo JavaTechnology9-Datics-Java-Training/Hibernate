@@ -61,4 +61,15 @@ public class Category {
         childCategory.setParentCategory(this);
         childCategories.add(childCategory);
     }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", parentCategory=" + parentCategory +
+                ", childCategories=" + childCategories +
+                ", items=" + items +
+                '}';
+    }
 }

@@ -1,13 +1,11 @@
 package com.example.springhibernate;
 
-import org.hibernate.LockMode;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
 
 import java.awt.*;
 import java.util.Date;
+import java.util.List;
 
 public class HibernateMain {
     public static void main(String[] args) {
@@ -16,14 +14,14 @@ public class HibernateMain {
         //configuration.configure(new File("C:\\Users\\SURESH\\IdeaProjects\\Spring-core\\src\\hibernate.cfg.xml"));
         //configuration.configure("hibernate.cfg.xml");
         //configuration.addResource("Message.hbm.xml");
-        //configuration.addResource("Category.hbm.xml");
+        configuration.addResource("Category.hbm.xml");
         //configuration.addResource("User.hbm.xml");
         //configuration.addResource("CreditCard.hbm.xml");
         //configuration.addResource("BillingDetails.hbm.xml");
         //configuration.addResource("BankAccount.hbm.xml");
-        //configuration.addResource("Item.hbm.xml");
-        //configuration.addResource("Bid.hbm.xml");
-        configuration.addResource("Register.hbm.xml");
+//        configuration.addResource("Item.hbm.xml");
+//        configuration.addResource("Bid.hbm.xml");
+        //configuration.addResource("Register.hbm.xml");
         configuration.setPhysicalNamingStrategy(new HINamingStrategy());
         //configuration.addClass(com.example.springhibernate.Message.class);
         SessionFactory sessionFactory = configuration.buildSessionFactory();
@@ -35,11 +33,35 @@ public class HibernateMain {
 
 
         /*Category parentCategory=new Category();
-        parentCategory.setName("parent Category Example 2");
+        parentCategory.setName("Electronics");
         Category childCategory=new Category();
-        childCategory.setName("child category 2");
-        parentCategory.addChildCategory(childCategory);*/
+        childCategory.setName("Cell phones");
+        Category childCategory2=new Category();
+        childCategory2.setName("Computers");
+        parentCategory.addChildCategory(childCategory);
+        parentCategory.addChildCategory(childCategory2);
+        session.save(parentCategory);
+        transaction.commit();*/
+        /*Category computerCategory = session.load(Category.class, 14l);
+        Category childCategory=new Category();
+        childCategory.setName("Laptops");
+        *//*Category childCategory2=new Category();
+        childCategory2.setName("Monitors");*//*
+        computerCategory.addChildCategory(childCategory);
+        computerCategory.addChildCategory(childCategory2);
+        transaction.commit();*/
+        //Query category = session.createQuery("from Category");
+        Query category = session.createSQLQuery("select * FROM  hibernate.HI_CATEGORY");
+        //category.setLong("id",12l);
+        List list = category.list();
+        //System.out.println(list);
+        list.forEach(object->{
+            if(object instanceof Object[]){
+                Object[] arr=(Object[]) object;
+                System.out.println(arr[1]);
+            }
 
+        });
         /*User user=new User();
         Address homeAddress=new Address();
         Address billingAddress=new Address();
@@ -69,19 +91,19 @@ public class HibernateMain {
         bankAccount.setAccountNumber("5010045874");
         bankAccount.setBankName("HDFC-BANK");*/
         /*Item item=new Item();
-        item.setName("Inverse");
-        item.setDescription("Inverse Example");
+        item.setName("cascade2");
+        item.setDescription("cascade2 example");
 
         Bid bid1=new Bid();
-        bid1.setAmount("450");
+        bid1.setAmount("123");
         bid1.setItem(item);
         Bid bid2=new Bid();
-        bid2.setAmount("750");
+        bid2.setAmount("456");
         bid2.setItem(item);
 
         item.getBids().add(bid1);
-        item.getBids().add(bid2);*/
-        /*session.save(item);
+        item.getBids().add(bid2);
+        session.save(item);
         transaction.commit();*/
         //System.out.println("Inserted record successfully");
         /*Item item=new Item();
@@ -132,7 +154,7 @@ public class HibernateMain {
         session.saveOrUpdate(item);
         transaction.commit();*/
         //session.update();
-        Register register=new Register();// new transient to persistent
+        /*Register register=new Register();// new transient to persistent
         register.setFirstName("John");
         register.setLastName("Doe");
         session.save(register);
@@ -144,6 +166,6 @@ public class HibernateMain {
         register.setUsername("jonny");
         register.setLoginName("jonny_doe");
         session2.update(register);
-        transaction2.commit();
+        transaction2.commit();*/
     }
 }

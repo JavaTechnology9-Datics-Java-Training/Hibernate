@@ -21,7 +21,7 @@
         <property name = "description"  type = "string" not-null="true" > <!--insert="false" update="false"-->
             <column name="ITEM_DESCRIPTION"/>
         </property>
-        <set name="bids" inverse="true" cascade="none">
+        <set name="bids" inverse="true" cascade="all">
             <key column="ITEM_ID"/>
             <one-to-many class="Bid"/>
         </set>
