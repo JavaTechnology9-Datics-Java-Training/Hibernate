@@ -69,7 +69,7 @@ public class Category {
         childCategories.add(childCategory);
     }
 
-    @Override
+   /* @Override
     public String toString() {
         return "Category{" +
                 "id=" + id +
@@ -78,5 +78,5 @@ public class Category {
                 ", childCategories=" + childCategories +
                 ", items=" + items +
                 '}';
-    }
+    }*/
 }

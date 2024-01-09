@@ -29,5 +29,9 @@
         </set>
 
 
+
     </class>
+    <query name="CategoryLike">
+        <![CDATA[ from Category c where c.name like :name]]>
+    </query>
 </hibernate-mapping>

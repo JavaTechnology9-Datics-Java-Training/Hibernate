@@ -53,7 +53,7 @@ public class HibernateMain {
         }catch (Exception e){
             transaction.rollback();
         }*/
-        Category parentCategory=new Category();
+        /*Category parentCategory=new Category();
         parentCategory.setName("Many to Many");
         Category childCategory=new Category();
         childCategory.setName("Many to Many-child1");
@@ -79,7 +79,16 @@ public class HibernateMain {
         parentCategory.setItems(Set.of(item));
         item.setCategories(Set.of(parentCategory));
         session.save(parentCategory);
-        transaction.commit();
+        transaction.commit();*/
+
+        //Query query = session.createQuery("from Category c where c.name like 'Many to Many%'");
+       /* List<Category> list=session.createCriteria(Category.class).add(Restrictions.like("name","Many to Many1%")).list();
+        //List<Category> list = query.list();
+        System.out.println(list);*/
+        Query namedQuery = session.getNamedQuery("CategoryLike");
+        namedQuery.setString("name","Many to Many");
+        List<Category> list=namedQuery.list();
+        System.out.println(list);
         /*Address address=new Address();
         address.setStreet("646 Toorak Road");
         address.setCity("Toorak");
