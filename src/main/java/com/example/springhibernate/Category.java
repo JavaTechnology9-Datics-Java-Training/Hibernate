@@ -1,8 +1,13 @@
 package com.example.springhibernate;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
+import javax.persistence.Cacheable;
 import java.util.HashSet;
 import java.util.Set;
-
+/*@Cacheable
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)*/
 public class Category {
     private long id;
     private String name;
@@ -24,6 +29,8 @@ public class Category {
 
     public String getName() {
         return name;
+        //java.sql.Date
+        //java.util.Date
     }
 
     public void setName(String name) {

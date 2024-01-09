@@ -17,7 +17,7 @@
         <property name = "amount"  type = "string" not-null="true" > <!--insert="false" update="false"-->
             <column name="BID_AMOUNT"/>
         </property>
-        <many-to-one name="item" column="ITEM_ID" class="Item" not-null="true"/>
+        <many-to-one name="item" column="ITEM_ID" class="Item" not-null="true" outer-join="true"/>
 
     </class>
 </hibernate-mapping>

@@ -25,14 +25,16 @@ dependencies {
     implementation 'com.sun.xml.bind:jaxb-impl:2.3.1'
 
     implementation 'com.sun.xml.bind:jaxb-core:2.3.0.1'
-// https://mvnrepository.com/artifact/org.apache.geronimo.bundles/jaxb-impl
     implementation 'org.apache.geronimo.bundles:jaxb-impl:2.2.3-1_1'
-    // https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api
+
     implementation 'org.apache.logging.log4j:log4j-api:2.12.1'
-    // https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core
+
     implementation 'org.apache.logging.log4j:log4j-core:2.12.1'
-    // https://mvnrepository.com/artifact/org.slf4j/slf4j-api
-    //implementation 'org.slf4j:slf4j-api:2.0.9'
+
+    implementation 'org.ehcache:ehcache:3.10.8'
+    implementation 'org.hibernate:hibernate-ehcache:4.2.3.Final'
+
+    implementation 'net.sf.ehcache:ehcache-core:2.6.11'
 
 
 

@@ -4,7 +4,7 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping package="com.example.springhibernate">
-    <class name = "Item" table = "ITEM">
+    <class name = "Item" table = "ITEM" lazy="true">
 
         <meta attribute = "class-description">
             This class contains the Item detail.
@@ -21,9 +21,13 @@
         <property name = "description"  type = "string" not-null="true" > <!--insert="false" update="false"-->
             <column name="ITEM_DESCRIPTION"/>
         </property>
-        <set name="bids" inverse="true" cascade="all">
+        <set name="bids" inverse="true" cascade="all" batch-size="4">
             <key column="ITEM_ID"/>
             <one-to-many class="Bid"/>
+        </set>
+        <set name="categories" table="CATEGORY_ITEM" lazy="true" cascade="save-update" inverse="true">
+            <key column="ITEM_ID"></key>
+            <many-to-many class="Category" column="CATEGORY_ID"/>
         </set>
 
     </class>

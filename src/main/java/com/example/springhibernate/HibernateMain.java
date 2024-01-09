@@ -2,10 +2,13 @@ package com.example.springhibernate;
 
 import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.Restrictions;
 
+import javax.persistence.criteria.Expression;
 import java.awt.*;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 public class HibernateMain {
     public static void main(String[] args) {
@@ -15,12 +18,13 @@ public class HibernateMain {
         //configuration.configure("hibernate.cfg.xml");
         //configuration.addResource("Message.hbm.xml");
         configuration.addResource("Category.hbm.xml");
-        //configuration.addResource("User.hbm.xml");
+//        configuration.addResource("User.hbm.xml");
+//        configuration.addResource("Address.hbm.xml");
         //configuration.addResource("CreditCard.hbm.xml");
         //configuration.addResource("BillingDetails.hbm.xml");
         //configuration.addResource("BankAccount.hbm.xml");
-//        configuration.addResource("Item.hbm.xml");
-//        configuration.addResource("Bid.hbm.xml");
+        configuration.addResource("Item.hbm.xml");
+        configuration.addResource("Bid.hbm.xml");
         //configuration.addResource("Register.hbm.xml");
         configuration.setPhysicalNamingStrategy(new HINamingStrategy());
         //configuration.addClass(com.example.springhibernate.Message.class);
@@ -30,17 +34,61 @@ public class HibernateMain {
         /*Message message1 = session.get(Message.class, 5L);
         Message message=new Message("using log4j2.properties");
         message.setNextMessage(message1);*/
-
-
-        /*Category parentCategory=new Category();
-        parentCategory.setName("Electronics");
+        /*Transaction transaction=null;
+        try {
+             transaction = session.beginTransaction();
+            Category parentCategory=new Category();
+            parentCategory.setName("EHCache");
+            Category childCategory=new Category();
+            childCategory.setName("Ehcache1");
+            Category childCategory2=new Category();
+            childCategory2.setName("Ehcache2");
+            parentCategory.addChildCategory(childCategory);
+            parentCategory.addChildCategory(childCategory2);
+            session.save(parentCategory);
+            //session.flush();
+            transaction.commit();
+            //FlushMode.COMMIT;
+            Category computerCategory = session.load(Category.class, 14l,LockMode.NONE);
+        }catch (Exception e){
+            transaction.rollback();
+        }*/
+        Category parentCategory=new Category();
+        parentCategory.setName("Many to Many");
         Category childCategory=new Category();
-        childCategory.setName("Cell phones");
+        childCategory.setName("Many to Many-child1");
         Category childCategory2=new Category();
-        childCategory2.setName("Computers");
+        childCategory2.setName("Many to Many-child2");
         parentCategory.addChildCategory(childCategory);
         parentCategory.addChildCategory(childCategory2);
+
+        Item item=new Item();
+        item.setName("Many to Many Item");
+        item.setDescription("Many to Many Item example");
+
+        Bid bid1=new Bid();
+        bid1.setAmount("963");
+        bid1.setItem(item);
+        Bid bid2=new Bid();
+        bid2.setAmount("852");
+        bid2.setItem(item);
+
+        item.getBids().add(bid1);
+        item.getBids().add(bid2);
+
+        parentCategory.setItems(Set.of(item));
+        item.setCategories(Set.of(parentCategory));
         session.save(parentCategory);
+        transaction.commit();
+        /*Address address=new Address();
+        address.setStreet("646 Toorak Road");
+        address.setCity("Toorak");
+        address.setZipcode("3000");
+        User user=new User();
+        user.setUsername("Address-User");
+        address.setUser(user);
+        user.setBillingAddress(address);
+        session.save(user);
         transaction.commit();*/
         /*Category computerCategory = session.load(Category.class, 14l);
         Category childCategory=new Category();
@@ -51,7 +99,7 @@ public class HibernateMain {
         computerCategory.addChildCategory(childCategory2);
         transaction.commit();*/
         //Query category = session.createQuery("from Category");
-        Query category = session.createSQLQuery("select * FROM  hibernate.HI_CATEGORY");
+        /*Query category = session.createSQLQuery("select * FROM  hibernate.HI_CATEGORY");
         //category.setLong("id",12l);
         List list = category.list();
         //System.out.println(list);
@@ -61,7 +109,21 @@ public class HibernateMain {
                 System.out.println(arr[1]);
             }
 
-        });
+        });*/
+        /*Criteria criteria = session.createCriteria(Item.class);
+        //criteria.add(Restrictions.like("name","Computers"));
+        List<Item> list = criteria.list();
+        for (Item item : list) {
+            System.out.println(item.getName());
+            Hibernate.initialize(item.getBids());
+            System.out.println(item.getBids());
+        }*/
+
+        /*Criteria criteria1 = session.createCriteria(Bid.class);
+        List<Bid> list1 = criteria1.list();
+        for (Bid bid : list1) {
+            System.out.println(bid);
+        }*/
         /*User user=new User();
         Address homeAddress=new Address();
         Address billingAddress=new Address();
@@ -169,3 +231,4 @@ public class HibernateMain {
         transaction2.commit();*/
     }
 }
+

@@ -1,10 +1,11 @@
 package com.example.springhibernate;
-
 public class Address {
     private long id;
     private String street;
     private String city;
     private String zipcode;
+
+    private User user;
 
     public long getId() {
         return id;
@@ -36,5 +37,13 @@ public class Address {
 
     public void setZipcode(String zipcode) {
         this.zipcode = zipcode;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

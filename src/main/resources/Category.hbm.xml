@@ -23,6 +23,10 @@
             <key column="PARENT_CATEGORY_ID"></key>
             <one-to-many class="Category"/>
         </set>
+        <set name="items" table="CATEGORY_ITEM" lazy="true" cascade="save-update">
+            <key column="CATEGORY_ID"></key>
+            <many-to-many class="Item" column="ITEM_ID"/>
+        </set>
 
 
     </class>
